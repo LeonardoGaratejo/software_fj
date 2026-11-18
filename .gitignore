@@ -1,0 +1,9 @@
+# Archivos generados por Python
+__pycache__/
+*.pyc
+
+# Puntos de control de Jupyter
+.ipynb_checkpoints/
+
+# El log se genera al ejecutar; no se versiona
+logs/*.log
