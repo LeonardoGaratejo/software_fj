@@ -1,4 +1,6 @@
 from software_fj.entidad import EntidadSistema
+from software_fj.cliente import Cliente      # Para validar que el cliente sea un Cliente real
+from software_fj.servicios import Servicio   # Para validar que el servicio sea un Servicio real
 from software_fj.excepciones import (
     ReservaInvalidaError,
     OperacionNoPermitidaError,
@@ -17,14 +19,16 @@ class Reserva(EntidadSistema):
     def __init__(self, id_reserva, cliente, servicio, duracion):
         super().__init__(id_reserva)
 
-        if cliente is None:
+        # Se valida el TIPO y no solo que exista: un texto u otro objeto
+        # cualquiera no puede usarse como cliente o como servicio.
+        if not isinstance(cliente, Cliente):
             raise ReservaInvalidaError(
-                "La reserva requiere un cliente válido."
+                "La reserva requiere un cliente válido.", detalle=cliente
             )
 
-        if servicio is None:
+        if not isinstance(servicio, Servicio):
             raise ReservaInvalidaError(
-                "La reserva requiere un servicio válido."
+                "La reserva requiere un servicio válido.", detalle=servicio
             )
 
         try:
